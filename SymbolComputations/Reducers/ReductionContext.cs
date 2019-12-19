@@ -30,6 +30,8 @@ namespace SymbolComputations.Reducers
 
         public Symbol Reduce(Symbol symbol, IReducer reducer)
         {
+            EnterScope(symbol.Scope);
+            
             if (symbol is TailHolderSymbol t)
             {
                 symbol = t.FabricWithScope(t
@@ -42,8 +44,7 @@ namespace SymbolComputations.Reducers
                     .ToImmutableList()
                 );
             }
-
-            EnterScope(symbol.Scope);
+            
             Symbol result = reducer.Reduce(this, symbol);
             result.Scope = new Scope(symbol.Scope, result.Scope.ListScope());
             LeaveScope();
