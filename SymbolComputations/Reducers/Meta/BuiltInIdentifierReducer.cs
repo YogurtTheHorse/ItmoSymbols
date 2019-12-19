@@ -36,6 +36,11 @@ namespace SymbolComputations.Reducers.Meta
 
             Symbol primarySymbol = ReduceImplementation(context, i);
 
+            if (primarySymbol is null)
+            {
+                return s;
+            }
+
             return _action switch
             {
                 RestArgumentsAction.Ignore => primarySymbol,

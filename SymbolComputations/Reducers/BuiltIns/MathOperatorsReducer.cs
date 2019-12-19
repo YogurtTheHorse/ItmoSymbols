@@ -30,7 +30,7 @@ namespace SymbolComputations.Reducers.BuiltIns
             };
 
             return value is null
-                ? identifier as Symbol
+                ? null
                 : new Literal<decimal>(value.Value);
         }
     }
